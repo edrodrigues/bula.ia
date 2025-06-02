@@ -1,0 +1,198 @@
+body {
+  font-family: 'Segoe UI', 'Inter', Arial, sans-serif;
+  margin: 0;
+  background: #f4f6fa;
+  color: #1a202c;
+}
+header {
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(30, 41, 59, 0.04);
+  padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  min-height: 64px;
+}
+.container {
+  width: 92%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.logo {
+  font-weight: 800;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #4f8fc0;
+  letter-spacing: 0.5px;
+}
+nav {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+}
+nav a {
+  text-decoration: none;
+  color: #334155;
+  font-size: 1.05rem;
+  font-weight: 500;
+  transition: color 0.2s;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+nav a:hover {
+  color: #4f8fc0;
+  background: #f1f5f9;
+}
+.btn {
+  background: linear-gradient(90deg, #4f8fc0 60%, #3a6b94 100%);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.55rem 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1.05rem;
+  box-shadow: 0 2px 8px rgba(79,143,192,0.08);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+  letter-spacing: 0.2px;
+}
+.btn:hover {
+  background: linear-gradient(90deg, #3a6b94 60%, #4f8fc0 100%);
+  box-shadow: 0 4px 16px rgba(79,143,192,0.13);
+  transform: translateY(-2px) scale(1.03);
+}
+.hero {
+  background: #e0e7ef;
+  border-radius: 1.5rem;
+  margin: 2.5rem 0 3rem 0;
+  padding: 4rem 2rem 3.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: linear-gradient(120deg, rgba(79,143,192,0.82) 0%, rgba(58,107,148,0.7) 100%), url('https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=1200&q=80');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  min-height: 340px;
+  box-shadow: 0 4px 32px rgba(30, 41, 59, 0.09);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(79,143,192,0.82) 0%, rgba(58,107,148,0.7) 100%);
+  border-radius: 1.5rem;
+  z-index: 1;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  max-width: 650px;
+}
+.hero h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.2rem;
+  line-height: 1.18;
+  letter-spacing: 0.5px;
+}
+.hero p {
+  font-size: 1.18rem;
+  margin-bottom: 2.2rem;
+  color: #e0e7ef;
+  font-weight: 400;
+}
+.section-title {
+  font-size: 1.7rem;
+  font-weight: 800;
+  margin-bottom: 0.7rem;
+  color: #1e293b;
+  letter-spacing: 0.2px;
+}
+.section-desc {
+  font-size: 1.08rem;
+  color: #475569;
+  margin-bottom: 2.2rem;
+  font-weight: 400;
+}
+.features, .business-advantages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+.feature, .advantage {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  padding: 2rem 1.5rem 1.7rem 1.5rem;
+  flex: 1 1 280px;
+  min-width: 240px;
+  box-shadow: 0 2px 12px rgba(30, 41, 59, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  transition: box-shadow 0.2s, transform 0.15s;
+}
+.feature:hover, .advantage:hover {
+  box-shadow: 0 8px 32px rgba(79,143,192,0.13);
+  transform: translateY(-4px) scale(1.03);
+}
+.feature h3, .advantage h3 {
+  font-size: 1.18rem;
+  font-weight: 700;
+  margin: 0 0 0.3rem 0;
+  color: #4f8fc0;
+  letter-spacing: 0.1px;
+}
+.feature p, .advantage p {
+  font-size: 1.03rem;
+  color: #334155;
+  margin: 0;
+  font-weight: 400;
+}
+@media (max-width: 900px) {
+  .features, .business-advantages {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .hero {
+    padding: 2.5rem 1rem 2.5rem 1rem;
+  }
+}
+.footer {
+  background: #1e293b;
+  border-top: 1px solid #334155;
+  padding: 2rem 0 1.2rem 0;
+  text-align: center;
+  color: #cbd5e1;
+  font-size: 1.05rem;
+  margin-top: 3rem;
+  letter-spacing: 0.1px;
+}
+.footer .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.card-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.7rem;
+}
+.card-icon svg {
+  width: 36px;
+  height: 36px;
+  stroke: #4f8fc0;
+  display: block;
+} 

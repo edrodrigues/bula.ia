@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KPIs dos Avatares - Bula.IA</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .kpi-main {
+      max-width: 900px;
+      margin: 2.5rem auto 0 auto;
+      padding: 0 1.5rem 2.5rem 1.5rem;
+    }
+    .kpi-title {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 1.2rem;
+      color: #1a202c;
+    }
+    .kpi-section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 2.2rem 0 0.7rem 0;
+      color: #222;
+    }
+    .kpi-card {
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 2px 12px rgba(30, 41, 59, 0.06);
+      padding: 1.2rem 1.1rem 1.1rem 1.1rem;
+      margin-bottom: 1.2rem;
+    }
+    .kpi-card-row {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.2rem;
+    }
+    .kpi-card-metric {
+      flex: 1 1 180px;
+      background: #f7fafc;
+      border-radius: 0.7rem;
+      padding: 1rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-width: 160px;
+      margin-bottom: 0.7rem;
+    }
+    .kpi-metric-label {
+      color: #64748b;
+      font-size: 0.98rem;
+      margin-bottom: 0.3rem;
+    }
+    .kpi-metric-value {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 0.2rem;
+    }
+    .kpi-metric-desc {
+      color: #64748b;
+      font-size: 0.97rem;
+    }
+    .kpi-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.7rem;
+      background: #f7fafc;
+      border-radius: 0.7rem;
+      overflow: hidden;
+    }
+    .kpi-table th, .kpi-table td {
+      padding: 0.7rem 1rem;
+      text-align: left;
+      font-size: 0.98rem;
+    }
+    .kpi-table th {
+      color: #64748b;
+      font-weight: 700;
+      background: #f1f5f9;
+    }
+    .kpi-table tr:not(:last-child) td {
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .kpi-bar-chart {
+      width: 100%;
+      height: 120px;
+      display: flex;
+      align-items: flex-end;
+      gap: 0.7rem;
+      margin-top: 0.7rem;
+      margin-bottom: 0.7rem;
+    }
+    .kpi-bar {
+      flex: 1;
+      background: #4f8fc0;
+      border-radius: 0.3rem 0.3rem 0 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      color: #fff;
+      font-size: 0.9rem;
+      min-width: 24px;
+    }
+    .kpi-bar-label {
+      text-align: center;
+      color: #64748b;
+      font-size: 0.92rem;
+      margin-top: 0.2rem;
+    }
+    @media (max-width: 700px) {
+      .kpi-main {
+        padding: 0 0.2rem 2.5rem 0.2rem;
+      }
+      .kpi-card-row {
+        flex-direction: column;
+        gap: 0.7rem;
+      }
+    }
+    .avatar-filter-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .avatar-filter-btn {
+      background: #f4f6fa;
+      color: #4f8fc0;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 999px;
+      padding: 0.5rem 1.4rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s, border 0.18s, box-shadow 0.18s;
+      outline: none;
+      box-shadow: 0 1px 4px rgba(30,41,59,0.04);
+    }
+    .avatar-filter-btn.active {
+      background: linear-gradient(90deg, #4f8fc0 60%, #3a6b94 100%);
+      color: #fff;
+      border: 1.5px solid #4f8fc0;
+      box-shadow: 0 2px 8px rgba(79,143,192,0.10);
+    }
+    .avatar-filter-btn:hover:not(.active) {
+      background: #e6f1fa;
+      color: #3a6b94;
+      border: 1.5px solid #4f8fc0;
+    }
+  </style>
+</head>
+<body>
+  <nav class="dashboard-nav">
+    <div class="container" style="display: flex; align-items: center; justify-content: space-between;">
+      <a class="logo" href="index.html" style="text-decoration:none; color:inherit;">🔍 Bula.IA</a>
+      <div class="dashboard-nav-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="kpis.html">KPIs</a>
+        <a href="avatares.html">Avatares</a>
+      </div>
+      <div class="dashboard-nav-actions">
+        <button class="dashboard-bell" aria-label="Notificações">
+          <svg width="22" height="22" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 16v-5a6 6 0 1 0-12 0v5l-2 2v1h16v-1l-2-2z"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </button>
+        <span class="dashboard-company-logo" style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:#e3f0fd;border:2px solid #e2e8f0;">
+          <svg width="38" height="38" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="16" fill="#4f8fc0"/><text x="19" y="25" text-anchor="middle" font-size="13" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">Corp</text></svg>
+        </span>
+      </div>
+    </div>
+  </nav>
+  <main class="kpi-main" role="main" aria-label="KPIs dos Avatares">
+    <h1 class="kpi-title">KPIs dos Avatares</h1>
+    <div class="avatar-filter-row">
+      <button class="avatar-filter-btn active" data-avatar="all">Todos os Avatares</button>
+      <button class="avatar-filter-btn" data-avatar="marhia">Marhia.IA</button>
+      <button class="avatar-filter-btn" data-avatar="lucas">Lucas.IA</button>
+      <button class="avatar-filter-btn" data-avatar="drasaude">DraSaude.IA</button>
+    </div>
+    <section class="avatar-kpi-section" data-avatar="marhia">
+      <h2 class="kpi-section-title">Atividade e Engajamento</h2>
+      <div class="kpi-card-row">
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Usuários Ativos no Mês</div>
+          <div class="kpi-metric-value">1.234</div>
+          <div class="kpi-metric-desc">Total de usuários únicos que interagiram com Marhia.IA.</div>
+        </div>
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Taxa de Retenção</div>
+          <div class="kpi-metric-value">40%</div>
+          <div class="kpi-metric-desc">Usuários que retornaram para novas interações.</div>
+        </div>
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Sessões por Usuário</div>
+          <div class="kpi-metric-value">3,5</div>
+          <div class="kpi-metric-desc">Média de sessões por usuário no mês.</div>
+        </div>
+      </div>
+      <div class="kpi-card-row">
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Novos Usuários</div>
+          <div class="kpi-metric-value">800</div>
+          <div class="kpi-metric-desc">Usuários que interagiram pela primeira vez.</div>
+        </div>
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Total de Sessões</div>
+          <div class="kpi-metric-value">5.000</div>
+          <div class="kpi-metric-desc">Total de sessões realizadas com Marhia.IA.</div>
+        </div>
+      </div>
+    </section>
+    <section class="avatar-kpi-section" data-avatar="marhia">
+      <h2 class="kpi-section-title">Interação e Eficiência</h2>
+      <div class="kpi-card-row">
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Duração Média da Sessão</div>
+          <div class="kpi-metric-value">5 minutos</div>
+          <div class="kpi-metric-desc">Tempo médio de cada sessão de conversa.</div>
+        </div>
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Perguntas por Sessão</div>
+          <div class="kpi-metric-value">2,5</div>
+          <div class="kpi-metric-desc">Média de perguntas feitas por sessão.</div>
+        </div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-metric-label" style="margin-bottom:0.5rem;">Distribuição de Sessões na Semana</div>
+        <div class="kpi-bar-chart">
+          <div class="kpi-bar" style="height: 60px;">20</div>
+          <div class="kpi-bar" style="height: 80px;">30</div>
+          <div class="kpi-bar" style="height: 100px;">40</div>
+          <div class="kpi-bar" style="height: 90px;">36</div>
+          <div class="kpi-bar" style="height: 70px;">28</div>
+          <div class="kpi-bar" style="height: 50px;">15</div>
+          <div class="kpi-bar" style="height: 40px;">11</div>
+        </div>
+        <div style="display:flex; justify-content:space-between;">
+          <div class="kpi-bar-label">Seg</div>
+          <div class="kpi-bar-label">Ter</div>
+          <div class="kpi-bar-label">Qua</div>
+          <div class="kpi-bar-label">Qui</div>
+          <div class="kpi-bar-label">Sex</div>
+          <div class="kpi-bar-label">Sáb</div>
+          <div class="kpi-bar-label">Dom</div>
+        </div>
+        <div style="color:#64748b; font-size:0.97rem; margin-top:0.7rem;">Total de sessões: <b>150</b></div>
+      </div>
+    </section>
+    <section class="avatar-kpi-section" data-avatar="marhia">
+      <h2 class="kpi-section-title">Satisfação e Feedback</h2>
+      <div class="kpi-card-row">
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Avaliação de Satisfação</div>
+          <div class="kpi-metric-value">75%</div>
+          <div class="kpi-metric-desc">Usuários satisfeitos com as respostas de Marhia.IA.</div>
+        </div>
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Taxa de Resolução</div>
+          <div class="kpi-metric-value">90%</div>
+          <div class="kpi-metric-desc">Dúvidas resolvidas sem necessidade de encaminhamento.</div>
+        </div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-metric-label" style="margin-bottom:0.5rem;">Principais Perguntas dos Usuários</div>
+        <table class="kpi-table">
+          <thead>
+            <tr>
+              <th>Pergunta</th>
+              <th>Frequência</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Como tomar Paracetamol?</td><td>32</td></tr>
+            <tr><td>Quais os efeitos colaterais da Amoxicilina?</td><td>27</td></tr>
+            <tr><td>Posso tomar Ibuprofeno com Dipirona?</td><td>19</td></tr>
+            <tr><td>Interação entre remédios X e Y?</td><td>15</td></tr>
+            <tr><td>Como armazenar medicamentos?</td><td>12</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="kpi-card-row">
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Tempo Médio de Resposta</div>
+          <div class="kpi-metric-value">10s</div>
+          <div class="kpi-metric-desc">Tempo médio para Marhia.IA responder uma pergunta.</div>
+        </div>
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Taxa de Compreensão</div>
+          <div class="kpi-metric-value">95%</div>
+          <div class="kpi-metric-desc">Perguntas compreendidas corretamente pelo avatar.</div>
+        </div>
+      </div>
+      <div class="kpi-card-row">
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Feedback Positivo</div>
+          <div class="kpi-metric-value">85%</div>
+          <div class="kpi-metric-desc">Usuários que avaliaram positivamente a experiência.</div>
+        </div>
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Feedback Negativo</div>
+          <div class="kpi-metric-value">5%</div>
+          <div class="kpi-metric-desc">Usuários que avaliaram negativamente a experiência.</div>
+        </div>
+      </div>
+    </section>
+    <!-- Lucas.IA -->
+    <section class="avatar-kpi-section" data-avatar="lucas" style="display:none;">
+      <h2 class="kpi-section-title">Atividade e Engajamento</h2>
+      <div class="kpi-card-row">
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Usuários Ativos no Mês</div>
+          <div class="kpi-metric-value">980</div>
+          <div class="kpi-metric-desc">Total de usuários únicos que interagiram com Lucas.IA.</div>
+        </div>
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Taxa de Retenção</div>
+          <div class="kpi-metric-value">35%</div>
+          <div class="kpi-metric-desc">Usuários que retornaram para novas interações.</div>
+        </div>
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Sessões por Usuário</div>
+          <div class="kpi-metric-value">2,9</div>
+          <div class="kpi-metric-desc">Média de sessões por usuário no mês.</div>
+        </div>
+      </div>
+      <div class="kpi-card-row">
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Novos Usuários</div>
+          <div class="kpi-metric-value">600</div>
+          <div class="kpi-metric-desc">Usuários que interagiram pela primeira vez.</div>
+        </div>
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Total de Sessões</div>
+          <div class="kpi-metric-value">3.200</div>
+          <div class="kpi-metric-desc">Total de sessões realizadas com Lucas.IA.</div>
+        </div>
+      </div>
+    </section>
+    <section class="avatar-kpi-section" data-avatar="lucas" style="display:none;">
+      <h2 class="kpi-section-title">Interação e Eficiência</h2>
+      <div class="kpi-card-row">
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Duração Média da Sessão</div>
+          <div class="kpi-metric-value">4 minutos</div>
+          <div class="kpi-metric-desc">Tempo médio de cada sessão de conversa.</div>
+        </div>
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Perguntas por Sessão</div>
+          <div class="kpi-metric-value">2,2</div>
+          <div class="kpi-metric-desc">Média de perguntas feitas por sessão.</div>
+        </div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-metric-label" style="margin-bottom:0.5rem;">Distribuição de Sessões na Semana</div>
+        <div class="kpi-bar-chart">
+          <div class="kpi-bar" style="height: 50px;">15</div>
+          <div class="kpi-bar" style="height: 70px;">22</div>
+          <div class="kpi-bar" style="height: 90px;">30</div>
+          <div class="kpi-bar" style="height: 80px;">27</div>
+          <div class="kpi-bar" style="height: 60px;">19</div>
+          <div class="kpi-bar" style="height: 40px;">10</div>
+          <div class="kpi-bar" style="height: 30px;">7</div>
+        </div>
+        <div style="display:flex; justify-content:space-between;">
+          <div class="kpi-bar-label">Seg</div>
+          <div class="kpi-bar-label">Ter</div>
+          <div class="kpi-bar-label">Qua</div>
+          <div class="kpi-bar-label">Qui</div>
+          <div class="kpi-bar-label">Sex</div>
+          <div class="kpi-bar-label">Sáb</div>
+          <div class="kpi-bar-label">Dom</div>
+        </div>
+        <div style="color:#64748b; font-size:0.97rem; margin-top:0.7rem;">Total de sessões: <b>90</b></div>
+      </div>
+    </section>
+    <section class="avatar-kpi-section" data-avatar="lucas" style="display:none;">
+      <h2 class="kpi-section-title">Satisfação e Feedback</h2>
+      <div class="kpi-card-row">
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Avaliação de Satisfação</div>
+          <div class="kpi-metric-value">70%</div>
+          <div class="kpi-metric-desc">Usuários satisfeitos com as respostas de Lucas.IA.</div>
+        </div>
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Taxa de Resolução</div>
+          <div class="kpi-metric-value">88%</div>
+          <div class="kpi-metric-desc">Dúvidas resolvidas sem necessidade de encaminhamento.</div>
+        </div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-metric-label" style="margin-bottom:0.5rem;">Principais Perguntas dos Usuários</div>
+        <table class="kpi-table">
+          <thead>
+            <tr>
+              <th>Pergunta</th>
+              <th>Frequência</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Como tomar Amoxicilina?</td><td>18</td></tr>
+            <tr><td>Quais os efeitos do Ibuprofeno?</td><td>15</td></tr>
+            <tr><td>Posso tomar Paracetamol com outros remédios?</td><td>12</td></tr>
+            <tr><td>Interação entre antibióticos?</td><td>10</td></tr>
+            <tr><td>Como armazenar remédios?</td><td>8</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="kpi-card-row">
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Tempo Médio de Resposta</div>
+          <div class="kpi-metric-value">12s</div>
+          <div class="kpi-metric-desc">Tempo médio para Lucas.IA responder uma pergunta.</div>
+        </div>
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Taxa de Compreensão</div>
+          <div class="kpi-metric-value">92%</div>
+          <div class="kpi-metric-desc">Perguntas compreendidas corretamente pelo avatar.</div>
+        </div>
+      </div>
+      <div class="kpi-card-row">
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Feedback Positivo</div>
+          <div class="kpi-metric-value">80%</div>
+          <div class="kpi-metric-desc">Usuários que avaliaram positivamente a experiência.</div>
+        </div>
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Feedback Negativo</div>
+          <div class="kpi-metric-value">8%</div>
+          <div class="kpi-metric-desc">Usuários que avaliaram negativamente a experiência.</div>
+        </div>
+      </div>
+    </section>
+    <!-- DraSaude.IA -->
+    <section class="avatar-kpi-section" data-avatar="drasaude" style="display:none;">
+      <h2 class="kpi-section-title">Atividade e Engajamento</h2>
+      <div class="kpi-card-row">
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Usuários Ativos no Mês</div>
+          <div class="kpi-metric-value">1.500</div>
+          <div class="kpi-metric-desc">Total de usuários únicos que interagiram com DraSaude.IA.</div>
+        </div>
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Taxa de Retenção</div>
+          <div class="kpi-metric-value">45%</div>
+          <div class="kpi-metric-desc">Usuários que retornaram para novas interações.</div>
+        </div>
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Sessões por Usuário</div>
+          <div class="kpi-metric-value">4,1</div>
+          <div class="kpi-metric-desc">Média de sessões por usuário no mês.</div>
+        </div>
+      </div>
+      <div class="kpi-card-row">
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Novos Usuários</div>
+          <div class="kpi-metric-value">950</div>
+          <div class="kpi-metric-desc">Usuários que interagiram pela primeira vez.</div>
+        </div>
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Total de Sessões</div>
+          <div class="kpi-metric-value">6.200</div>
+          <div class="kpi-metric-desc">Total de sessões realizadas com DraSaude.IA.</div>
+        </div>
+      </div>
+    </section>
+    <section class="avatar-kpi-section" data-avatar="drasaude" style="display:none;">
+      <h2 class="kpi-section-title">Interação e Eficiência</h2>
+      <div class="kpi-card-row">
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Duração Média da Sessão</div>
+          <div class="kpi-metric-value">6 minutos</div>
+          <div class="kpi-metric-desc">Tempo médio de cada sessão de conversa.</div>
+        </div>
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Perguntas por Sessão</div>
+          <div class="kpi-metric-value">3,1</div>
+          <div class="kpi-metric-desc">Média de perguntas feitas por sessão.</div>
+        </div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-metric-label" style="margin-bottom:0.5rem;">Distribuição de Sessões na Semana</div>
+        <div class="kpi-bar-chart">
+          <div class="kpi-bar" style="height: 70px;">25</div>
+          <div class="kpi-bar" style="height: 90px;">32</div>
+          <div class="kpi-bar" style="height: 110px;">45</div>
+          <div class="kpi-bar" style="height: 100px;">41</div>
+          <div class="kpi-bar" style="height: 80px;">29</div>
+          <div class="kpi-bar" style="height: 60px;">18</div>
+          <div class="kpi-bar" style="height: 50px;">13</div>
+        </div>
+        <div style="display:flex; justify-content:space-between;">
+          <div class="kpi-bar-label">Seg</div>
+          <div class="kpi-bar-label">Ter</div>
+          <div class="kpi-bar-label">Qua</div>
+          <div class="kpi-bar-label">Qui</div>
+          <div class="kpi-bar-label">Sex</div>
+          <div class="kpi-bar-label">Sáb</div>
+          <div class="kpi-bar-label">Dom</div>
+        </div>
+        <div style="color:#64748b; font-size:0.97rem; margin-top:0.7rem;">Total de sessões: <b>175</b></div>
+      </div>
+    </section>
+    <section class="avatar-kpi-section" data-avatar="drasaude" style="display:none;">
+      <h2 class="kpi-section-title">Satisfação e Feedback</h2>
+      <div class="kpi-card-row">
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Avaliação de Satisfação</div>
+          <div class="kpi-metric-value">82%</div>
+          <div class="kpi-metric-desc">Usuários satisfeitos com as respostas de DraSaude.IA.</div>
+        </div>
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Taxa de Resolução</div>
+          <div class="kpi-metric-value">93%</div>
+          <div class="kpi-metric-desc">Dúvidas resolvidas sem necessidade de encaminhamento.</div>
+        </div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-metric-label" style="margin-bottom:0.5rem;">Principais Perguntas dos Usuários</div>
+        <table class="kpi-table">
+          <thead>
+            <tr>
+              <th>Pergunta</th>
+              <th>Frequência</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Como tomar Dipirona?</td><td>22</td></tr>
+            <tr><td>Quais os efeitos colaterais do Paracetamol?</td><td>19</td></tr>
+            <tr><td>Posso tomar Amoxicilina com Ibuprofeno?</td><td>16</td></tr>
+            <tr><td>Interação entre remédios para dor?</td><td>13</td></tr>
+            <tr><td>Como descartar medicamentos?</td><td>10</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="kpi-card-row">
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Tempo Médio de Resposta</div>
+          <div class="kpi-metric-value">8s</div>
+          <div class="kpi-metric-desc">Tempo médio para DraSaude.IA responder uma pergunta.</div>
+        </div>
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Taxa de Compreensão</div>
+          <div class="kpi-metric-value">97%</div>
+          <div class="kpi-metric-desc">Perguntas compreendidas corretamente pelo avatar.</div>
+        </div>
+      </div>
+      <div class="kpi-card-row">
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Feedback Positivo</div>
+          <div class="kpi-metric-value">90%</div>
+          <div class="kpi-metric-desc">Usuários que avaliaram positivamente a experiência.</div>
+        </div>
+        <div class="kpi-card-metric">
+          <div class="kpi-metric-label">Feedback Negativo</div>
+          <div class="kpi-metric-value">3%</div>
+          <div class="kpi-metric-desc">Usuários que avaliaram negativamente a experiência.</div>
+        </div>
+      </div>
+    </section>
+    <div style="color:#64748b; font-size:0.97rem; margin-top:1.5rem;">* KPIs fictícios para demonstração visual. Adapte para seus indicadores reais.</div>
+  </main>
+  <script>
+    const filterBtns = document.querySelectorAll('.avatar-filter-btn');
+    const kpiSections = document.querySelectorAll('.avatar-kpi-section');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const avatar = btn.getAttribute('data-avatar');
+        if (avatar === 'all') {
+          kpiSections.forEach(section => {
+            section.style.display = '';
+          });
+        } else {
+          kpiSections.forEach(section => {
+            if(section.getAttribute('data-avatar') === avatar) {
+              section.style.display = '';
+            } else {
+              section.style.display = 'none';
+            }
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html> 

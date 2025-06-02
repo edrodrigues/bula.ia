@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciamento de Avatares - Bula.IA</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .avatar-main {
+      max-width: 700px;
+      margin: 2.5rem auto 0 auto;
+      padding: 0 1.5rem 2.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .avatar-title {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 2.2rem;
+      color: #1a202c;
+      text-align: center;
+    }
+    .avatar-card {
+      background: #fff;
+      border-radius: 1.2rem;
+      box-shadow: 0 2px 12px rgba(30, 41, 59, 0.06);
+      padding: 2.5rem 2rem 2rem 2rem;
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2.5rem;
+    }
+    .avatar-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #f7e3db;
+      margin-bottom: 1.2rem;
+      border: 4px solid #f4f6fa;
+      box-shadow: 0 2px 8px rgba(30,41,59,0.07);
+    }
+    .avatar-upload-label {
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: #23262b;
+      margin-bottom: 0.2rem;
+      text-align: center;
+      cursor: pointer;
+      display: block;
+    }
+    .avatar-upload-desc {
+      color: #888;
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+      text-align: center;
+    }
+    .avatar-input-row {
+      width: 100%;
+      margin-bottom: 1.5rem;
+    }
+    .avatar-input-row label {
+      font-size: 1rem;
+      color: #334155;
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+      display: block;
+    }
+    .avatar-input-row input[type="text"] {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      background: #f7fafc;
+      color: #1a202c;
+      transition: border 0.2s;
+      margin-top: 0.2rem;
+    }
+    .avatar-input-row input[type="text"]:focus {
+      border: 1.5px solid #4f8fc0;
+      outline: none;
+    }
+    .avatar-save-btn {
+      background: #222;
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 0.7rem 2.2rem;
+      font-weight: 600;
+      font-size: 1.08rem;
+      cursor: pointer;
+      margin-top: 0.7rem;
+      transition: background 0.2s;
+    }
+    .avatar-save-btn:hover {
+      background: #4f8fc0;
+    }
+    .avatar-list-row {
+      display: flex;
+      gap: 1rem;
+      margin: 2.5rem 0 1.5rem 0;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .avatar-list-btn {
+      background: #f4f6fa;
+      color: #4f8fc0;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 999px;
+      padding: 0.5rem 1.4rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s, border 0.18s, box-shadow 0.18s;
+      outline: none;
+      box-shadow: 0 1px 4px rgba(30,41,59,0.04);
+    }
+    .avatar-list-btn.active {
+      background: linear-gradient(90deg, #4f8fc0 60%, #3a6b94 100%);
+      color: #fff;
+      border: 1.5px solid #4f8fc0;
+      box-shadow: 0 2px 8px rgba(79,143,192,0.10);
+    }
+    .avatar-list-btn:hover:not(.active) {
+      background: #e6f1fa;
+      color: #3a6b94;
+      border: 1.5px solid #4f8fc0;
+    }
+    .avatar-sources-card {
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 2px 12px rgba(30, 41, 59, 0.06);
+      padding: 1.2rem 1.1rem 1.1rem 1.1rem;
+      margin-bottom: 1.2rem;
+      width: 100%;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .avatar-sources-title {
+      font-weight: 700;
+      font-size: 1.12rem;
+      color: #23262b;
+      margin-bottom: 1rem;
+    }
+    .avatar-sources-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #f7fafc;
+      border-radius: 0.7rem;
+      overflow: hidden;
+    }
+    .avatar-sources-table th, .avatar-sources-table td {
+      padding: 0.7rem 1rem;
+      text-align: left;
+      font-size: 0.98rem;
+    }
+    .avatar-sources-table th {
+      color: #64748b;
+      font-weight: 700;
+      background: #f1f5f9;
+    }
+    .avatar-sources-table tr:not(:last-child) td {
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .avatar-sources-table td {
+      color: #222;
+      vertical-align: middle;
+    }
+    .avatar-sources-table .qr-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #f4f6fa;
+      border: 1.5px solid #e2e8f0;
+      transition: border 0.2s, background 0.2s;
+    }
+    .avatar-sources-table .qr-icon.active {
+      border: 2.5px solid #4f8fc0;
+      background: #e6f1fa;
+    }
+    .avatar-sources-table .qr-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: #64748b;
+    }
+    .avatar-sources-table .qr-icon.active svg {
+      stroke: #4f8fc0;
+    }
+    @media (max-width: 700px) {
+      .avatar-main {
+        padding: 0 0.2rem 2.5rem 0.2rem;
+      }
+      .avatar-card {
+        padding: 1.5rem 0.5rem;
+        max-width: 98vw;
+      }
+      .avatar-sources-card {
+        padding: 1rem 0.2rem;
+        max-width: 99vw;
+      }
+    }
+    /* Fontes Adicionadas styles (image) */
+    .fontes-card {
+      background: #fcfdff;
+      border-radius: 18px;
+      box-shadow: 0 2px 12px rgba(30,41,59,0.06);
+      padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+      margin-bottom: 1.2rem;
+      width: 100%;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      border: 1.5px solid #f1f5f9;
+    }
+    .fontes-title {
+      font-weight: 700;
+      font-size: 1.18rem;
+      color: #23262b;
+      margin-bottom: 1.1rem;
+    }
+    .fontes-list-wrap {
+      display: flex;
+      flex-direction: row;
+      gap: 1.2rem;
+      align-items: flex-start;
+    }
+    .fontes-list {
+      flex: 1 1 0;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .fontes-checkcol {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      margin-top: 2.1rem;
+      align-items: center;
+      min-width: 32px;
+      max-height: 260px;
+      overflow-y: auto;
+    }
+    .fontes-check-all {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+      color: #1976d2;
+      margin-bottom: 0.7rem;
+      font-size: 1.05rem;
+      user-select: none;
+    }
+    .fontes-check-all-label {
+      font-weight: 500;
+      color: #1976d2;
+      font-size: 1.05rem;
+    }
+    .fontes-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.1rem 0;
+      border-radius: 7px;
+      transition: background 0.15s, border 0.15s;
+    }
+    .fontes-item.error {
+      border-left: 3px solid #e53935;
+      background: #fff6f6;
+    }
+    .fontes-checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.05rem;
+      color: #23262b;
+      font-weight: 400;
+      cursor: pointer;
+      user-select: none;
+    }
+    .fontes-checkbox {
+      accent-color: #1976d2;
+      width: 20px;
+      height: 20px;
+      margin-right: 0.2rem;
+      border-radius: 5px;
+      border: 1.5px solid #b0b8c1;
+      background: #fff;
+      transition: border 0.15s;
+    }
+    .fontes-checkmark {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+      border: 1.5px solid #b0b8c1;
+      background: #fff;
+      margin-right: 0.2rem;
+      vertical-align: middle;
+      position: relative;
+      transition: border 0.15s, background 0.15s;
+    }
+    .fontes-checkbox:checked + .fontes-checkmark {
+      border: 2px solid #1976d2;
+      background: #e3f0fd;
+    }
+    .fontes-checkmark.error {
+      border: 2px solid #e53935;
+      background: #fff6f6;
+    }
+    .fontes-checkicon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #e3f0fd;
+      border: 1.5px solid #1976d2;
+      margin-bottom: 0.1rem;
+      opacity: 0.7;
+    }
+    .fontes-checkicon.checked {
+      background: #1976d2;
+      opacity: 1;
+    }
+    .fontes-checkicon svg {
+      display: block;
+      margin: auto;
+      stroke: #fff;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+    .fontes-checkicon:not(.checked) svg {
+      stroke: #b0b8c1;
+    }
+    @media (max-width: 700px) {
+      .fontes-card {
+        padding: 1rem 0.2rem;
+        max-width: 99vw;
+      }
+      .fontes-list-wrap {
+        flex-direction: column;
+        gap: 0.7rem;
+      }
+      .fontes-checkcol {
+        flex-direction: row;
+        gap: 0.7rem;
+        margin-top: 0.7rem;
+        max-height: none;
+        overflow-y: visible;
+      }
+    }
+    /* Avatar Info Table styles */
+    .avatar-info-table-wrap {
+      width: 100%;
+      margin-top: 1.5rem;
+    }
+    .avatar-info-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: #fcfdff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 1px 6px rgba(30,41,59,0.04);
+    }
+    .avatar-info-table th, .avatar-info-table td {
+      padding: 1.1rem 1.2rem;
+      text-align: left;
+      font-size: 1.05rem;
+    }
+    .avatar-info-table th {
+      color: #7b8ca6;
+      font-weight: 700;
+      background: #f6fafd;
+      border-bottom: 1.5px solid #e3e8f0;
+    }
+    .avatar-info-table td {
+      color: #23262b;
+      background: #fff;
+      border-bottom: 1px solid #f3f5f7;
+      vertical-align: middle;
+    }
+    .avatar-info-table tr:last-child td {
+      border-bottom: none;
+    }
+    .avatar-info-qr {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #f1f5fa;
+      margin: auto;
+    }
+    .avatar-info-qr svg {
+      width: 22px;
+      height: 22px;
+      stroke: #7b8ca6;
+    }
+  </style>
+</head>
+<body>
+  <nav class="dashboard-nav">
+    <div class="container" style="display: flex; align-items: center; justify-content: space-between;">
+      <a class="logo" href="index.html" style="text-decoration:none; color:inherit;">🔍 Bula.IA</a>
+      <div class="dashboard-nav-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="kpis.html">KPIs</a>
+        <a href="avatares.html">Avatares</a>
+      </div>
+      <div class="dashboard-nav-actions">
+        <button class="dashboard-bell" aria-label="Notificações">
+          <svg width="22" height="22" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 16v-5a6 6 0 1 0-12 0v5l-2 2v1h16v-1l-2-2z"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </button>
+        <span class="dashboard-company-logo" style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:#e3f0fd;border:2px solid #e2e8f0;">
+          <svg width="38" height="38" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="16" fill="#4f8fc0"/><text x="19" y="25" text-anchor="middle" font-size="13" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">Corp</text></svg>
+        </span>
+      </div>
+    </div>
+  </nav>
+  <main class="avatar-main">
+    <div class="avatar-title">Gerenciamento de Avatar</div>
+    <div class="avatar-list-row">
+      <button class="avatar-list-btn active" data-avatar="marhia">Marhia.IA</button>
+      <button class="avatar-list-btn" data-avatar="lucas">Lucas.IA</button>
+      <button class="avatar-list-btn" data-avatar="drasaude">DraSaude.IA</button>
+    </div>
+    <div class="avatar-card">
+      <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Avatar" class="avatar-img" id="avatarImg">
+      <label for="avatarUpload" class="avatar-upload-label">Editar Avatar</label>
+      <input type="file" id="avatarUpload" accept="image/*" style="display:none;">
+      <div class="avatar-upload-desc">Clique para carregar uma nova imagem para o seu perfil.</div>
+      <div class="avatar-input-row">
+        <label for="avatarName">Nome</label>
+        <input type="text" id="avatarName" value="Marhia.IA">
+      </div>
+      <button class="avatar-save-btn">Salvar Alterações</button>
+      <div id="avatarInfoTable"></div>
+    </div>
+    <div id="avatarSources">
+      <!-- Sources table will be rendered here -->
+    </div>
+  </main>
+  <script>
+    // Avatar image upload preview
+    const avatarImg = document.getElementById('avatarImg');
+    const avatarUpload = document.getElementById('avatarUpload');
+    avatarImg.onclick = () => avatarUpload.click();
+    document.querySelector('.avatar-upload-label').onclick = () => avatarUpload.click();
+    avatarUpload.onchange = function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          avatarImg.src = evt.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+
+    // Avatar sources data (static example)
+    const avatarSourcesData = {
+      marhia: [
+        { nome: 'Bula de Paracetamol', url: 'www.bulaia.com.br/paracetamol', qr: true },
+        { nome: 'Estudo: Interação Paracetamol e Ibuprofeno', url: 'www.bulaia.com.br/estudo-paracetamol-ibu', qr: false },
+      ],
+      lucas: [
+        { nome: 'Bula de Amoxicilina', url: 'www.bulaia.com.br/amoxicilina', qr: true },
+        { nome: 'Estudo: Interação Amoxicilina e Álcool', url: 'www.bulaia.com.br/estudo-amox-alcool', qr: false },
+      ],
+      drasaude: [
+        { nome: 'Bula de Dipirona', url: 'www.bulaia.com.br/dipirona', qr: true },
+        { nome: 'Estudo: Efeitos Cruzados de Antibióticos', url: 'www.bulaia.com.br/estudo-antibioticos', qr: false },
+      ]
+    };
+
+    function renderSources(avatar) {
+      // New: sources for the UI in the image
+      const allSources = [
+        { nome: 'Bula de Paracetamol', checked: false },
+        { nome: 'Bula de Amoxicilina', checked: false },
+        { nome: 'Estudo: Interação Paracetamol e Ibuprofeno', checked: false },
+        { nome: 'Estudo: Efeitos Cruzados de Antibióticos', checked: false, error: true },
+        { nome: 'Bula de Ibuprofeno', checked: false },
+        { nome: 'Estudo: Interação Amoxicilina e Álcool', checked: false },
+        { nome: 'Bula de Dipirona', checked: false },
+      ];
+      // For demo, all checked except the error one
+      allSources.forEach((s, i) => { if (!s.error) s.checked = true; });
+      let html = `<div class='fontes-card'>
+        <div class='fontes-title'>Fontes Adicionadas</div>
+        <div class='fontes-list-wrap'>
+          <div class='fontes-list'>
+            <label class='fontes-check-all'>
+              <input type='checkbox' checked id='checkAllFontes'>
+              <span class='fontes-checkmark'></span>
+              <span class='fontes-check-all-label'>Selecionar todas as fontes</span>
+            </label>`;
+      allSources.forEach((src, idx) => {
+        html += `<div class='fontes-item${src.error ? ' error' : ''}'>
+          <label class='fontes-checkbox-label'>
+            <input type='checkbox' ${src.checked ? 'checked' : ''} data-idx='${idx}' class='fontes-checkbox'>
+            <span class='fontes-checkmark${src.error ? ' error' : ''}'></span>
+            <span>${src.nome}</span>
+          </label>
+        </div>`;
+      });
+      html += `</div>
+          <div class='fontes-checkcol'>`;
+      allSources.forEach((src) => {
+        html += `<span class='fontes-checkicon${src.checked ? ' checked' : ''}'><svg width='18' height='18' viewBox='0 0 20 20' fill='none' stroke='${src.checked ? '#1976d2' : '#b0b8c1'}' stroke-width='2'><polyline points='5 11 9 15 15 7'></polyline></svg></span>`;
+      });
+      html += `</div></div></div>`;
+      document.getElementById('avatarSources').innerHTML = html;
+      // Add scroll if needed
+      const list = document.querySelector('.fontes-list');
+      if (list) list.style.maxHeight = '260px';
+      if (list) list.style.overflowY = 'auto';
+    }
+
+    // Avatar info table data
+    const avatarInfoData = {
+      marhia: { nome: 'Marhia.IA', url: 'www.bulaia.com.br/marhia' },
+      lucas: { nome: 'Lucas.IA', url: 'www.bulaia.com.br/lucas' },
+      drasaude: { nome: 'DraSaude.IA', url: 'www.bulaia.com.br/drasaude' },
+    };
+    function renderAvatarInfoTable(avatar) {
+      const info = avatarInfoData[avatar] || {};
+      document.getElementById('avatarInfoTable').innerHTML = `
+        <div class='avatar-info-table-wrap'>
+          <table class='avatar-info-table'>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>URL</th>
+                <th>QR Code</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>${info.nome || ''}</td>
+                <td>${info.url || ''}</td>
+                <td><span class='avatar-info-qr'><svg fill='none' stroke='#7b8ca6' stroke-width='2' viewBox='0 0 24 24'><rect x='3' y='3' width='6' height='6'/><rect x='15' y='3' width='6' height='6'/><rect x='3' y='15' width='6' height='6'/><rect x='15' y='15' width='6' height='6'/><rect x='10' y='10' width='4' height='4'/></svg></span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    // Avatar list button logic
+    const avatarBtns = document.querySelectorAll('.avatar-list-btn');
+    avatarBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        avatarBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const avatar = btn.getAttribute('data-avatar');
+        // Change avatar image and name for demo
+        if (avatar === 'marhia') {
+          avatarImg.src = 'https://randomuser.me/api/portraits/women/44.jpg';
+          document.getElementById('avatarName').value = 'Marhia.IA';
+        } else if (avatar === 'lucas') {
+          avatarImg.src = 'https://randomuser.me/api/portraits/men/32.jpg';
+          document.getElementById('avatarName').value = 'Lucas.IA';
+        } else if (avatar === 'drasaude') {
+          avatarImg.src = 'https://randomuser.me/api/portraits/women/65.jpg';
+          document.getElementById('avatarName').value = 'DraSaude.IA';
+        }
+        renderSources(avatar);
+        renderAvatarInfoTable(avatar);
+      });
+    });
+    // Initial render
+    renderSources('marhia');
+    renderAvatarInfoTable('marhia');
+  </script>
+</body>
+</html> 
