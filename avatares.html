@@ -21,17 +21,18 @@
       color: #1a202c;
       text-align: center;
     }
-    .avatar-card {
+    .avatar-card, .fontes-card, .personality-card {
       background: #fff;
       border-radius: 1.2rem;
       box-shadow: 0 2px 12px rgba(30, 41, 59, 0.06);
       padding: 2.5rem 2rem 2rem 2rem;
       width: 100%;
-      max-width: 420px;
+      max-width: 450px;
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-bottom: 2.5rem;
+      border: none;
     }
     .avatar-img {
       width: 120px;
@@ -209,156 +210,144 @@
     }
     /* Fontes Adicionadas styles (image) */
     .fontes-card {
-      background: #fcfdff;
-      border-radius: 18px;
-      box-shadow: 0 2px 12px rgba(30,41,59,0.06);
-      padding: 1.5rem 1.2rem 1.2rem 1.2rem;
-      margin-bottom: 1.2rem;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(30,41,59,0.05);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
       width: 100%;
-      max-width: 700px;
+      max-width: 450px;
       margin-left: auto;
       margin-right: auto;
-      border: 1.5px solid #f1f5f9;
+      border: 1px solid #e2e8f0;
     }
     .fontes-title {
       font-weight: 700;
-      font-size: 1.18rem;
-      color: #23262b;
-      margin-bottom: 1.1rem;
+      font-size: 1.25rem;
+      color: #1a202c;
+      margin-bottom: 0.5rem;
     }
-    .fontes-list-wrap {
+    .fontes-description {
+      font-size: 1rem;
+      color: #64748b;
+      margin-bottom: 1.5rem;
+    }
+    .fontes-select-all {
       display: flex;
-      flex-direction: row;
-      gap: 1.2rem;
-      align-items: flex-start;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+      color: #1a202c;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      user-select: none;
+      cursor: pointer;
+    }
+    .fontes-select-all input[type="checkbox"] {
+      accent-color: #1976d2;
+      width: 18px;
+      height: 18px;
     }
     .fontes-list {
-      flex: 1 1 0;
-      min-width: 0;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
-    }
-    .fontes-checkcol {
-      display: flex;
-      flex-direction: column;
-      gap: 1.1rem;
-      margin-top: 2.1rem;
-      align-items: center;
-      min-width: 32px;
-      max-height: 260px;
-      overflow-y: auto;
-    }
-    .fontes-check-all {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-weight: 500;
-      color: #1976d2;
-      margin-bottom: 0.7rem;
-      font-size: 1.05rem;
-      user-select: none;
-    }
-    .fontes-check-all-label {
-      font-weight: 500;
-      color: #1976d2;
-      font-size: 1.05rem;
+      gap: 0.75rem;
     }
     .fontes-item {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.1rem 0;
-      border-radius: 7px;
-      transition: background 0.15s, border 0.15s;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 1rem;
+      gap: 1rem;
+      box-shadow: 0 1px 4px rgba(30,41,59,0.04);
+      transition: border-color 0.2s ease-in-out;
     }
     .fontes-item.error {
-      border-left: 3px solid #e53935;
-      background: #fff6f6;
+      border-color: #e53935;
+      background: #fff8f8;
     }
-    .fontes-checkbox-label {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 1.05rem;
-      color: #23262b;
-      font-weight: 400;
-      cursor: pointer;
-      user-select: none;
-    }
-    .fontes-checkbox {
+    .fontes-item input[type="checkbox"] {
       accent-color: #1976d2;
       width: 20px;
       height: 20px;
-      margin-right: 0.2rem;
-      border-radius: 5px;
-      border: 1.5px solid #b0b8c1;
-      background: #fff;
-      transition: border 0.15s;
+      flex-shrink: 0;
     }
-    .fontes-checkmark {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border-radius: 5px;
-      border: 1.5px solid #b0b8c1;
-      background: #fff;
-      margin-right: 0.2rem;
-      vertical-align: middle;
-      position: relative;
-      transition: border 0.15s, background 0.15s;
+    .fontes-item-content {
+      flex-grow: 1;
     }
-    .fontes-checkbox:checked + .fontes-checkmark {
-      border: 2px solid #1976d2;
-      background: #e3f0fd;
+    .fontes-item-name {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #23262b;
+      margin-bottom: 0.2rem;
     }
-    .fontes-checkmark.error {
-      border: 2px solid #e53935;
-      background: #fff6f6;
+    .fontes-item-type {
+      font-size: 0.9rem;
+      color: #64748b;
     }
-    .fontes-checkicon {
+    .fontes-item-icon {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 28px;
-      height: 28px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
-      background: #e3f0fd;
-      border: 1.5px solid #1976d2;
-      margin-bottom: 0.1rem;
-      opacity: 0.7;
+      background: #e2e8f0;
+      flex-shrink: 0;
     }
-    .fontes-checkicon.checked {
-      background: #1976d2;
-      opacity: 1;
+    .fontes-item-icon.info svg {
+      stroke: #4f8fc0;
     }
-    .fontes-checkicon svg {
-      display: block;
-      margin: auto;
-      stroke: #fff;
-      stroke-width: 2.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      fill: none;
+    .fontes-item-icon.warning {
+      background: #ffedea;
+      border: 1px solid #e57373;
     }
-    .fontes-checkicon:not(.checked) svg {
-      stroke: #b0b8c1;
+    .fontes-item-icon.warning svg {
+      stroke: #e53935;
+    }
+    .fontes-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .fontes-cancel-btn, .fontes-save-btn {
+      padding: 0.7rem 1.5rem;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    }
+    .fontes-cancel-btn {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #e2e8f0;
+    }
+    .fontes-cancel-btn:hover {
+      background: #e2e8f0;
+    }
+    .fontes-save-btn {
+      background: #1a202c;
+      color: #fff;
+      border: none;
+    }
+    .fontes-save-btn:hover {
+      background: #2d3748;
     }
     @media (max-width: 700px) {
       .fontes-card {
-        padding: 1rem 0.2rem;
-        max-width: 99vw;
+        padding: 1rem 0.5rem;
       }
-      .fontes-list-wrap {
+      .fontes-actions {
         flex-direction: column;
-        gap: 0.7rem;
+        gap: 0.75rem;
       }
-      .fontes-checkcol {
-        flex-direction: row;
-        gap: 0.7rem;
-        margin-top: 0.7rem;
-        max-height: none;
-        overflow-y: visible;
+      .fontes-cancel-btn, .fontes-save-btn {
+        width: 100%;
+        text-align: center;
       }
     }
     /* Avatar Info Table styles */
@@ -410,6 +399,85 @@
       height: 22px;
       stroke: #7b8ca6;
     }
+    /* Style for the Add Source button */
+    .fontes-add-button {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      background: #f1f5f9; /* Light background */
+      color: #475569; /* Text color */
+      border: 1px solid #e2e8f0; /* Border */
+      border-radius: 999px; /* Pill shape */
+      padding: 0.35rem 1rem; /* Padding */
+      font-size: 1rem; /* Font size */
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    }
+    .fontes-add-button:hover {
+      background: #e2e8f0; /* Darker background on hover */
+      border-color: #cbd5e1;
+    }
+    .fontes-add-button svg {
+      width: 18px;
+      height: 18px;
+      stroke: #475569;
+      stroke-width: 2;
+    }
+    /* Personality Card Styles */
+    .personality-card {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(30,41,59,0.05);
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        width: 100%;
+        max-width: 450px;
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px solid #e2e8f0;
+    }
+    .personality-title {
+        font-weight: 700;
+        font-size: 1.25rem;
+        color: #1a202c;
+        margin-bottom: 1.5rem;
+    }
+    .personality-attribute {
+        margin-bottom: 1.5rem;
+    }
+    .personality-attribute label {
+        display: block;
+        font-size: 1rem;
+        color: #334155;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+    .personality-attribute textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        min-height: 80px; /* Sufficient height for text */
+        resize: vertical; /* Allow vertical resize */
+        margin-bottom: 0.75rem;
+    }
+    .personality-attribute button {
+        display: inline-block;
+        background: #1a202c;
+        color: #fff;
+        border: none;
+        border-radius: 999px;
+        padding: 0.5rem 1.2rem;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s ease-in-out;
+    }
+    .personality-attribute button:hover {
+        background: #2d3748;
+    }
   </style>
 </head>
 <body>
@@ -420,6 +488,8 @@
         <a href="dashboard.html">Dashboard</a>
         <a href="kpis.html">KPIs</a>
         <a href="avatares.html">Avatares</a>
+        <a href="conversation.html">Conversas</a>
+        <a href="corporation-profile.html">Perfil</a>
       </div>
       <div class="dashboard-nav-actions">
         <button class="dashboard-bell" aria-label="Notificações">
@@ -503,45 +573,80 @@
     function renderSources(avatar) {
       // New: sources for the UI in the image
       const allSources = [
-        { nome: 'Bula de Paracetamol', checked: false },
-        { nome: 'Bula de Amoxicilina', checked: false },
-        { nome: 'Estudo: Interação Paracetamol e Ibuprofeno', checked: false },
-        { nome: 'Estudo: Efeitos Cruzados de Antibióticos', checked: false, error: true },
-        { nome: 'Bula de Ibuprofeno', checked: false },
-        { nome: 'Estudo: Interação Amoxicilina e Álcool', checked: false },
-        { nome: 'Bula de Dipirona', checked: false },
+        { nome: 'Bula de Paracetamol', tipo: 'Bula', checked: true, icon: 'info' },
+        { nome: 'Estudo: Interação Paracetamol e Ibuprofeno', tipo: 'Estudo', checked: true, icon: 'info' },
+        { nome: 'Bula de Amoxicilina', tipo: 'Bula', checked: true, icon: 'info' },
+        { nome: 'Estudo: Interação Amoxicilina e Álcool', tipo: 'Estudo', checked: true, icon: 'info' },
+        { nome: 'Bula de Ibuprofeno', tipo: 'Bula', checked: true, icon: 'info' },
+        { nome: 'Bula de Dipirona', tipo: 'Bula', checked: true, icon: 'info' },
       ];
-      // For demo, all checked except the error one
-      allSources.forEach((s, i) => { if (!s.error) s.checked = true; });
       let html = `<div class='fontes-card'>
-        <div class='fontes-title'>Fontes Adicionadas</div>
-        <div class='fontes-list-wrap'>
-          <div class='fontes-list'>
-            <label class='fontes-check-all'>
-              <input type='checkbox' checked id='checkAllFontes'>
-              <span class='fontes-checkmark'></span>
-              <span class='fontes-check-all-label'>Selecionar todas as fontes</span>
-            </label>`;
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <div class='fontes-title'>Selecione Fontes de Treinamento</div>
+          <button class='fontes-add-button'>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Adicionar Fonte
+          </button>
+        </div>
+        <div class='fontes-description'>Escolha quais fontes incluir no treinamento do seu chatbot RAG. Estudos trazem dados completos e bulas oferecem informações rápidas.</div>
+        <label class='fontes-select-all'>
+          <input type='checkbox' id='checkAllFontes' ${allSources.every(s => s.checked) ? 'checked' : ''}>
+          Selecionar todas as fontes
+        </label>
+        <div class='fontes-list'>`;
       allSources.forEach((src, idx) => {
         html += `<div class='fontes-item${src.error ? ' error' : ''}'>
-          <label class='fontes-checkbox-label'>
-            <input type='checkbox' ${src.checked ? 'checked' : ''} data-idx='${idx}' class='fontes-checkbox'>
-            <span class='fontes-checkmark${src.error ? ' error' : ''}'></span>
-            <span>${src.nome}</span>
-          </label>
+          <input type='checkbox' ${src.checked ? 'checked' : ''} data-idx='${idx}' class='fontes-checkbox'>
+          <div class='fontes-item-content'>
+            <div class='fontes-item-name'>${src.nome}</div>
+            <div class='fontes-item-type'>${src.tipo}</div>
+          </div>
+          <span class='fontes-item-icon ${src.icon}'>
+            <svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
+              ${src.icon === 'info' ? '<circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>' : '<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>'}
+            </svg>
+          </span>
         </div>`;
       });
       html += `</div>
-          <div class='fontes-checkcol'>`;
-      allSources.forEach((src) => {
-        html += `<span class='fontes-checkicon${src.checked ? ' checked' : ''}'><svg width='18' height='18' viewBox='0 0 20 20' fill='none' stroke='${src.checked ? '#1976d2' : '#b0b8c1'}' stroke-width='2'><polyline points='5 11 9 15 15 7'></polyline></svg></span>`;
-      });
-      html += `</div></div></div>`;
+        <div class='fontes-actions'>
+            <button class='fontes-cancel-btn'>Cancelar</button>
+            <button class='fontes-save-btn'>Salvar Seleção (${allSources.filter(s => s.checked).length})</button>
+        </div>
+        </div>`;
       document.getElementById('avatarSources').innerHTML = html;
-      // Add scroll if needed
       const list = document.querySelector('.fontes-list');
       if (list) list.style.maxHeight = '260px';
       if (list) list.style.overflowY = 'auto';
+
+      document.getElementById('checkAllFontes').addEventListener('change', function() {
+        const isChecked = this.checked;
+        document.querySelectorAll('.fontes-list input[type="checkbox"]').forEach(cb => {
+          cb.checked = isChecked;
+        });
+        updateSaveButtonCount();
+      });
+
+      document.querySelectorAll('.fontes-list input[type="checkbox"]').forEach(cb => {
+        cb.addEventListener('change', function() {
+          updateSaveButtonCount();
+          updateSelectAllCheckbox();
+        });
+      });
+
+      function updateSaveButtonCount() {
+        const checkedCount = document.querySelectorAll('.fontes-list input[type="checkbox"]:checked').length;
+        document.querySelector('.fontes-save-btn').textContent = `Salvar Seleção (${checkedCount})`;
+      }
+
+      function updateSelectAllCheckbox() {
+        const totalCheckboxes = document.querySelectorAll('.fontes-list input[type="checkbox"]').length;
+        const checkedCheckboxes = document.querySelectorAll('.fontes-list input[type="checkbox"]:checked').length;
+        document.getElementById('checkAllFontes').checked = totalCheckboxes === checkedCheckboxes;
+      }
     }
 
     // Avatar info table data
@@ -599,6 +704,48 @@
     // Initial render
     renderSources('marhia');
     renderAvatarInfoTable('marhia');
+
+    // Function to render the Personality card
+    function renderPersonalityCard() {
+      const personalityAttributes = [
+        { id: 'toneOfVoice', label: 'Tom de voz', value: '' },
+        { id: 'brandAlignment', label: 'Alinhamento de Marca', value: '' },
+        { id: 'errorHandling', label: 'Como lidar com erros', value: '' },
+      ];
+
+      let html = `<div class='personality-card'>
+        <div class='personality-title'>Personalidade</div>
+      `;
+
+      personalityAttributes.forEach(attr => {
+        html += `<div class='personality-attribute'>
+            <label for='${attr.id}'>${attr.label}</label>
+            <textarea id='${attr.id}' maxlength='300'>${attr.value}</textarea>
+            <button data-attribute='${attr.id}'>Salvar</button>
+          </div>`;
+      });
+
+      html += `</div>`;
+      return html;
+    }
+
+    // Initial render
+    renderSources('marhia');
+    renderAvatarInfoTable('marhia');
+    // Initial render of the Personality card
+    document.getElementById('avatarSources').insertAdjacentHTML('beforebegin', renderPersonalityCard());
+
+    // Add event listeners for save buttons in the Personality card
+    document.querySelectorAll('.personality-card button').forEach(button => {
+      button.addEventListener('click', function() {
+        const attributeId = this.getAttribute('data-attribute');
+        const textarea = document.getElementById(attributeId);
+        const value = textarea.value;
+        // Here you would typically save the value for the specific attribute
+        console.log(`Saving ${attributeId}: ${value}`);
+        alert(`${attributeId} saved!`); // Simple confirmation
+      });
+    });
   </script>
 </body>
 </html> 

@@ -210,9 +210,11 @@
       font-size: 1rem;
     }
     .source-upload-section {
-      background: #23262b !important;
-      border: 1.5px dashed #444 !important;
-      box-shadow: none !important;
+      background: #fff !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 2px 12px rgba(30, 41, 59, 0.06) !important;
+      border-radius: 1.2rem !important;
+      padding: 2.5rem 2rem 2rem 2rem !important;
     }
     .source-dropzone {
       border: 2px dashed #444;
@@ -277,6 +279,171 @@
         width: 100%;
       }
     }
+    .fontes-card {
+      background: #fff;
+      border-radius: 1.2rem;
+      box-shadow: 0 2px 12px rgba(30, 41, 59, 0.06);
+      padding: 2.5rem 2rem 2rem 2rem;
+      width: 100%;
+      max-width: 450px;
+      margin-left: auto;
+      margin-right: auto;
+      border: none;
+      margin-bottom: 2.5rem;
+    }
+    .fontes-title {
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #1a202c;
+      margin-bottom: 0.5rem;
+    }
+    .fontes-description {
+      font-size: 1rem;
+      color: #64748b;
+      margin-bottom: 1.5rem;
+    }
+    .fontes-select-all {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+      color: #1a202c;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      user-select: none;
+      cursor: pointer;
+    }
+    .fontes-select-all input[type="checkbox"] {
+      accent-color: #1976d2;
+      width: 18px;
+      height: 18px;
+    }
+    .fontes-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .fontes-item {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 1rem;
+      gap: 1rem;
+      box-shadow: 0 1px 4px rgba(30,41,59,0.04);
+      transition: border-color 0.2s ease-in-out;
+    }
+    .fontes-item.error {
+      border-color: #e53935;
+      background: #fff8f8;
+    }
+    .fontes-item input[type="checkbox"] {
+      accent-color: #1976d2;
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+    .fontes-item-content {
+      flex-grow: 1;
+    }
+    .fontes-item-name {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #23262b;
+      margin-bottom: 0.2rem;
+    }
+    .fontes-item-type {
+      font-size: 0.9rem;
+      color: #64748b;
+    }
+    .fontes-item-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      flex-shrink: 0;
+    }
+    .fontes-item-icon.info svg {
+      stroke: #4f8fc0;
+    }
+    .fontes-item-icon.warning {
+      background: #ffedea;
+      border: 1px solid #e57373;
+    }
+    .fontes-item-icon.warning svg {
+      stroke: #e53935;
+    }
+    .fontes-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .fontes-cancel-btn, .fontes-save-btn {
+      padding: 0.7rem 1.5rem;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    }
+    .fontes-cancel-btn {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #e2e8f0;
+    }
+    .fontes-cancel-btn:hover {
+      background: #e2e8f0;
+    }
+    .fontes-save-btn {
+      background: #1a202c;
+      color: #fff;
+      border: none;
+    }
+    .fontes-save-btn:hover {
+      background: #2d3748;
+    }
+    @media (max-width: 700px) {
+      .fontes-card {
+        padding: 1rem 0.5rem;
+      }
+      .fontes-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .fontes-cancel-btn, .fontes-save-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+    .fontes-add-button {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #e2e8f0;
+      border-radius: 999px;
+      padding: 0.35rem 1rem;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    }
+    .fontes-add-button:hover {
+      background: #e2e8f0;
+      border-color: #cbd5e1;
+    }
+    .fontes-add-button svg {
+      width: 18px;
+      height: 18px;
+      stroke: #475569;
+      stroke-width: 2;
+    }
   </style>
 </head>
 <body>
@@ -287,6 +454,8 @@
         <a href="dashboard.html">Dashboard</a>
         <a href="kpis.html">KPIs</a>
         <a href="avatares.html">Avatares</a>
+        <a href="conversation.html">Conversas</a>
+        <a href="corporation-profile.html">Perfil</a>
       </div>
       <div class="dashboard-nav-actions">
         <button class="dashboard-bell" aria-label="Notificações">
@@ -309,13 +478,13 @@
         </div>
         <div style="color:#fff; font-size:1.18rem; font-weight:600; margin-bottom:0.5rem;">Enviar fontes</div>
         <div style="color:#b0b3b8; font-size:1rem; margin-bottom:0.7rem;">Arraste e solte ou <span style="color:#4f8fc0; cursor:pointer; text-decoration:underline;">escolha o arquivo</span> para enviar</div>
-        <div style="color:#888; font-size:0.98rem; margin-top:0.5rem;">Tipos de arquivo suportados: PDF, .txt, Markdown, Áudio (ex: mp3)</div>
+        <div style="color:#888; font-size:0.98rem; margin-top:0.5rem;">Tipos de arquivo suportados: PDF, .txt, Markdown, DOCX (ex: PDF)</div>
       </div>
       <div class="source-cards" style="display:flex; gap:1.5rem; flex-wrap:wrap; justify-content:center;">
         <div class="source-card" style="background:#23262b; border:1.5px solid #444; border-radius:1rem; padding:1.2rem 1.2rem 1.1rem 1.2rem; min-width:220px; flex:1 1 220px; max-width:260px; display:flex; flex-direction:column; align-items:flex-start; margin-bottom:1rem;">
           <div style="display:flex; align-items:center; gap:0.6rem; color:#fff; font-weight:600; margin-bottom:0.7rem;">
             <svg width="22" height="22" fill="none" stroke="#b0b3b8" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l9 4-9 4-9-4 9-4z"/><path d="M3 6v6c0 5.25 3.5 9.74 9 11 5.5-1.26 9-5.75 9-11V6"/></svg>
-            Google Drive
+            Google Drive (em breve)
           </div>
           <div style="display:flex; gap:0.7rem;">
             <button class="source-btn"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M16 3v4"/><path d="M8 3v4"/></svg> Google Docs</button>
@@ -325,10 +494,10 @@
         <div class="source-card" style="background:#23262b; border:1.5px solid #444; border-radius:1rem; padding:1.2rem 1.2rem 1.1rem 1.2rem; min-width:220px; flex:1 1 220px; max-width:260px; display:flex; flex-direction:column; align-items:flex-start; margin-bottom:1rem;">
           <div style="display:flex; align-items:center; gap:0.6rem; color:#fff; font-weight:600; margin-bottom:0.7rem;">
             <svg width="22" height="22" fill="none" stroke="#b0b3b8" stroke-width="2" viewBox="0 0 24 24"><path d="M17 17h2a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v2"/><path d="M7 17l5-5 5 5"/></svg>
-            Link
+            Link (em breve)
           </div>
           <div style="display:flex; gap:0.7rem;">
-            <button class="source-btn"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="7" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Site</button>
+            <button class="source-btn"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="7" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Site </button>
             <button class="source-btn"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="7" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><rect x="7" y="3" width="10" height="4" rx="1"/></svg> YouTube</button>
           </div>
         </div>
@@ -338,7 +507,7 @@
             Conectar Banco de Dados
           </div>
           <div style="display:flex; gap:0.7rem;">
-            <button class="source-btn"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><ellipse cx="12" cy="7" rx="8" ry="3.5"/><path d="M4 7v6c0 1.93 3.58 3.5 8 3.5s8-1.57 8-3.5V7"/><path d="M4 13v4c0 1.93 3.58 3.5 8 3.5s8-1.57 8-3.5v-4"/></svg> Conectar</button>
+            <button class="source-btn"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><ellipse cx="12" cy="7" rx="8" ry="3.5"/><path d="M4 7v6c0 1.93 3.58 3.5 8 3.5s8-1.57 8-3.5V7"/><path d="M4 13v4c0 1.93 3.58 3.5 8 3.5s8-1.57 8-3.5v-4"/></svg> Conectar (em breve)</button>
           </div>
         </div>
       </div>
@@ -440,8 +609,106 @@
         <a href="#contato" style="color:#cbd5e1; text-decoration:none; font-size:0.98rem;">Contato</a>
         <a href="mailto:contato@bula.ia" style="color:#cbd5e1; text-decoration:none; font-size:0.98rem;">contato@futurereadylabs.com.br</a>
       </div>
-      <div style="font-size:0.95rem; color:#64748b;">&copy; 2024 Bula.IA. Todos os direitos reservados.</div>
+      <div style="font-size:0.95rem; color:#64748b;">&copy; 2025 Bula.IA. Todos os direitos reservados.</div>
     </div>
   </footer>
+
+  <script>
+    // JavaScript for the Fontes card
+    function renderSources() {
+      // New: sources for the UI in the image (example data)
+      const allSources = [
+        { nome: 'Bula de Paracetamol', tipo: 'Bula', checked: true, icon: 'info' },
+        { nome: 'Estudo: Interação Paracetamol e Ibuprofeno', tipo: 'Estudo', checked: true, icon: 'info' },
+        { nome: 'Bula de Amoxicilina', tipo: 'Bula', checked: true, icon: 'info' },
+        { nome: 'Estudo: Interação Amoxicilina e Álcool', tipo: 'Estudo', checked: true, icon: 'info' },
+        { nome: 'Bula de Ibuprofeno', tipo: 'Bula', checked: true, icon: 'info' },
+        { nome: 'Bula de Dipirona', tipo: 'Bula', checked: true, icon: 'info' }
+      ];
+
+      let html = `
+        <div class="fontes-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <div class="fontes-title">Selecione Fontes de Treinamento</div>
+            <button class="fontes-add-button">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              Adicionar Fonte
+            </button>
+          </div>
+          <div class="fontes-description">Escolha quais fontes incluir no treinamento do seu chatbot RAG. Estudos trazem dados completos e bulas oferecem informações rápidas.</div>
+          <label class="fontes-select-all">
+            <input type="checkbox" id="checkAllFontesDashboard" ${allSources.every(s => s.checked) ? 'checked' : ''}>
+            Selecionar todas as fontes
+          </label>
+          <div class="fontes-list">`;
+
+      allSources.forEach((src, idx) => {
+        html += `
+          <div class="fontes-item${src.error ? ' error' : ''}">
+            <input type="checkbox" ${src.checked ? 'checked' : ''} data-idx="${idx}" class="fontes-checkbox">
+            <div class="fontes-item-content">
+              <div class="fontes-item-name">${src.nome}</div>
+              <div class="fontes-item-type">${src.tipo}</div>
+            </div>
+            <span class="fontes-item-icon ${src.icon}">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                ${src.icon === 'info' 
+                  ? '<circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>'
+                  : '<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>'
+                }
+              </svg>
+            </span>
+          </div>`;
+      });
+
+      html += `
+          </div>
+          <div class="fontes-actions">
+            <button class="fontes-cancel-btn">Cancelar</button>
+            <button class="fontes-save-btn">Salvar Seleção (${allSources.filter(s => s.checked).length})</button>
+          </div>
+        </div>`;
+
+      document.getElementById('dashboardSourcesContainer').innerHTML = html;
+
+      const list = document.querySelector('.fontes-list');
+      if (list) {
+        list.style.maxHeight = '260px';
+        list.style.overflowY = 'auto';
+      }
+
+      document.getElementById('checkAllFontesDashboard').addEventListener('change', function() {
+        const isChecked = this.checked;
+        document.querySelectorAll('.fontes-list input[type="checkbox"]').forEach(cb => {
+          cb.checked = isChecked;
+        });
+        updateSaveButtonCount();
+      });
+
+      document.querySelectorAll('.fontes-list input[type="checkbox"]').forEach(cb => {
+        cb.addEventListener('change', function() {
+          updateSaveButtonCount();
+          updateSelectAllCheckbox();
+        });
+      });
+
+      function updateSaveButtonCount() {
+        const checkedCount = document.querySelectorAll('.fontes-list input[type="checkbox"]:checked').length;
+        document.querySelector('.fontes-save-btn').textContent = `Salvar Seleção (${checkedCount})`;
+      }
+
+      function updateSelectAllCheckbox() {
+        const totalCheckboxes = document.querySelectorAll('.fontes-list input[type="checkbox"]').length;
+        const checkedCheckboxes = document.querySelectorAll('.fontes-list input[type="checkbox"]:checked').length;
+        document.getElementById('checkAllFontesDashboard').checked = totalCheckboxes === checkedCheckboxes;
+      }
+    }
+
+    // Call the renderSources function on page load
+    document.addEventListener('DOMContentLoaded', renderSources);
+  </script>
 </body>
 </html> 

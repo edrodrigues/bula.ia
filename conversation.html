@@ -120,6 +120,38 @@
         max-width: 95%;
       }
     }
+    /* Styles for avatar selection buttons */
+    .avatar-filter-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .avatar-filter-btn {
+      background: #f4f6fa;
+      color: #4f8fc0;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 999px;
+      padding: 0.5rem 1.4rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s, border 0.18s, box-shadow 0.18s;
+      outline: none;
+      box-shadow: 0 1px 4px rgba(30,41,59,0.04);
+    }
+    .avatar-filter-btn.active {
+      background: linear-gradient(90deg, #4f8fc0 60%, #3a6b94 100%);
+      color: #fff;
+      border: 1.5px solid #4f8fc0;
+      box-shadow: 0 2px 8px rgba(79,143,192,0.10);
+    }
+    .avatar-filter-btn:hover:not(.active) {
+      background: #e6f1fa;
+      color: #3a6b94;
+      border: 1.5px solid #4f8fc0;
+    }
   </style>
 </head>
 <body>
@@ -130,6 +162,8 @@
         <a href="dashboard.html">Dashboard</a>
         <a href="kpis.html">KPIs</a>
         <a href="avatares.html">Avatares</a>
+        <a href="conversation.html" class="active">Conversas</a>
+        <a href="corporation-profile.html">Perfil</a>
       </div>
       <div class="dashboard-nav-actions">
         <button class="dashboard-bell" aria-label="Notificações">
@@ -142,40 +176,13 @@
     </div>
   </nav>
   <main class="chat-main" role="main" aria-label="Exemplo de Conversa com Avatar">
-    <div class="chat-area">
-      <!-- Sample Conversation -->
-      <div class="message avatar">
-        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Avatar Marhia.IA" class="chat-avatar-img">
-        <div class="message-bubble">Olá! Sou o Marhia.IA, seu assistente de informações sobre medicamentos. Como posso ajudar hoje?</div>
-      </div>
-      <div class="message user">
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Usuário" class="chat-user-img">
-        <div class="message-bubble">Olá, Marhia! Gostaria de saber a dosagem recomendada de Paracetamol para adultos.</div>
-      </div>
-      <div class="message avatar">
-        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Avatar Marhia.IA" class="chat-avatar-img">
-        <div class="message-bubble">Para adultos, a dose usual de Paracetamol é de 500 mg a 1000 mg a cada 4 a 6 horas, conforme necessário, para alívio da dor ou febre. A dose máxima diária para adultos geralmente não deve exceder 4000 mg (4 gramas). É importante seguir as instruções da bula do medicamento específico que você tem, ou consultar um médico ou farmacêutico.</div>
-      </div>
-      <div class="message user">
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Usuário" class="chat-user-img">
-        <div class="message-bubble">Entendi. E quais são os efeitos colaterais mais comuns do Paracetamol?</div>
-      </div>
-      <div class="message avatar">
-        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Avatar Marhia.IA" class="chat-avatar-img">
-        <div class="message-bubble">O Paracetamol é geralmente bem tolerado nas doses recomendadas. Efeitos colaterais comuns são raros, mas podem incluir reações alérgicas (erupção cutânea), problemas hepáticos em casos de superdosagem, ou alterações sanguíneas raras. O risco de problemas hepáticos aumenta significativamente com doses maiores do que as recomendadas ou com o uso prolongado, especialmente em pessoas com problemas no fígado ou que consomem álcool regularmente.</div>
-      </div>
-      <div class="message user">
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Usuário" class="chat-user-img">
-        <div class="message-bubble">Posso tomar Paracetamol depois de beber álcool?</div>
-      </div>
-       <div class="message user">
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Usuário" class="chat-user-img">
-        <div class="message-bubble">Ótimo, muito obrigado pelas informações!</div>
-      </div>
-      <div class="message avatar">
-        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Avatar Marhia.IA" class="chat-avatar-img">
-        <div class="message-bubble">De nada! Estou à disposição se tiver mais alguma dúvida. Lembre-se sempre que estas são informações gerais e não substituem a orientação de um profissional de saúde.</div>
-      </div>
+    <div class="avatar-filter-row">
+      <button class="avatar-filter-btn active" data-avatar="marhia">Marhia.IA</button>
+      <button class="avatar-filter-btn" data-avatar="lucas">Lucas.IA</button>
+      <button class="avatar-filter-btn" data-avatar="drasaude">DraSaude.IA</button>
+    </div>
+    <div class="chat-area" id="chatArea">
+      <!-- Conversation content will be loaded here by script -->
     </div>
     <div class="chat-input-area">
       <input type="text" class="chat-input" placeholder="Faça sua pergunta...">
@@ -200,5 +207,107 @@
       <div style="font-size:0.95rem; color:#64748b;">&copy; 2024 Bula.IA. Todos os direitos reservados.</div>
     </div>
   </footer>
+  <script>
+    const avatarFilterBtns = document.querySelectorAll('.avatar-filter-btn');
+    const chatArea = document.getElementById('chatArea');
+
+    const conversations = {
+      marhia: `
+        <div class="message avatar">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Avatar Marhia.IA" class="chat-avatar-img">
+          <div class="message-bubble">Olá! Sou o Marhia.IA, seu assistente de informações sobre medicamentos. Como posso ajudar hoje?</div>
+        </div>
+        <div class="message user">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Usuário" class="chat-user-img">
+          <div class="message-bubble">Olá, Marhia! Gostaria de saber a dosagem recomendada de Paracetamol para adultos.</div>
+        </div>
+        <div class="message avatar">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Avatar Marhia.IA" class="chat-avatar-img">
+          <div class="message-bubble">Para adultos, a dose usual de Paracetamol é de 500 mg a 1000 mg a cada 4 a 6 horas, conforme necessário, para alívio da dor ou febre. A dose máxima diária para adultos geralmente não deve exceder 4000 mg (4 gramas). É importante seguir as instruções da bula do medicamento específico que você tem, ou consultar um médico ou farmacêutico.</div>
+        </div>
+        <div class="message user">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Usuário" class="chat-user-img">
+          <div class="message-bubble">Entendi. E quais são os efeitos colaterais mais comuns do Paracetamol?</div>
+        </div>
+        <div class="message avatar">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Avatar Marhia.IA" class="chat-avatar-img">
+          <div class="message-bubble">O Paracetamol é geralmente bem tolerado nas doses recomendadas. Efeitos colaterais comuns são raros, mas podem incluir reações alérgicas (erupção cutânea), problemas hepáticos em casos de superdosagem, ou alterações sanguíneas raras. O risco de problemas hepáticos aumenta significativamente com doses maiores do que as recomendadas ou com o uso prolongado, especialmente em pessoas com problemas no fígado ou que consomem álcool regularmente.</div>
+        </div>
+        <div class="message user">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Usuário" class="chat-user-img">
+          <div class="message-bubble">Posso tomar Paracetamol depois de beber álcool?</div>
+        </div>
+         <div class="message user">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Usuário" class="chat-user-img">
+          <div class="message-bubble">Ótimo, muito obrigado pelas informações!</div>
+        </div>
+        <div class="message avatar">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Avatar Marhia.IA" class="chat-avatar-img">
+          <div class="message-bubble">De nada! Estou à disposição se tiver mais alguma dúvida. Lembre-se sempre que estas são informações gerais e não substituem a orientação de um profissional de saúde.</div>
+        </div>
+      `,
+      lucas: `
+        <div class="message avatar">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Avatar Lucas.IA" class="chat-avatar-img">
+          <div class="message-bubble">Olá! Sou o Lucas.IA, pronto para ajudar com informações sobre saúde. No que posso ser útil hoje?</div>
+        </div>
+        <div class="message user">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Usuário" class="chat-user-img">
+          <div class="message-bubble">Oi, Lucas! Qual a dose de Amoxicilina para uma criança de 5 anos?</div>
+        </div>
+        <div class="message avatar">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Avatar Lucas.IA" class="chat-avatar-img">
+          <div class="message-bubble">A dosagem de Amoxicilina para crianças depende do peso da criança e da gravidade da infecção. É essencial que a dose seja prescrita por um médico. Nunca administre medicamentos a crianças sem orientação médica.</div>
+        </div>
+        <div class="message user">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Usuário" class="chat-user-img">
+          <div class="message-bubble">Entendido. Quais são os efeitos colaterais comuns da Amoxicilina em crianças?</div>
+        </div>
+        <div class="message avatar">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Avatar Lucas.IA" class="chat-avatar-img">
+          <div class="message-bubble">Os efeitos colaterais mais comuns da Amoxicilina em crianças são diarreia, náuseas, vômitos e erupções cutâneas. Reações alérgicas mais graves são raras, mas possíveis. Se notar qualquer reação adversa, procure atendimento médico imediatamente.</div>
+        </div>
+      `,
+      drasaude: `
+        <div class="message avatar">
+          <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Avatar DraSaude.IA" class="chat-avatar-img">
+          <div class="message-bubble">Olá! Sou a Dra. Saúde.IA, sua assistente virtual para dúvidas médicas gerais. Como posso te auxiliar hoje?</div>
+        </div>
+        <div class="message user">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Usuário" class="chat-user-img">
+          <div class="message-bubble">Bom dia, Dra. Saúde. Quais os sintomas de uma gripe forte?</div>
+        </div>
+        <div class="message avatar">
+          <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Avatar DraSaude.IA" class="chat-avatar-img">
+          <div class="message-bubble">Os sintomas de uma gripe forte geralmente incluem febre alta, dores musculares intensas, fadiga extrema, tosse seca e persistente, dor de garganta e congestão nasal. É importante descansar, hidratar-se e procurar um médico para diagnóstico e tratamento adequados.</div>
+        </div>
+        <div class="message user">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Usuário" class="chat-user-img">
+          <div class="message-bubble">Devo tomar antibiótico para gripe?</div>
+        </div>
+        <div class="message avatar">
+          <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Avatar DraSaude.IA" class="chat-avatar-img">
+          <div class="message-bubble">Gripe é causada por vírus, e antibióticos tratam infecções bacterianas. Portanto, antibióticos não são eficazes contra a gripe. O tratamento da gripe geralmente envolve repouso, hidratação e medicamentos para aliviar os sintomas, como antitérmicos e analgésicos. O uso de antibióticos só é indicado se houver uma complicação bacteriana secundária, e apenas sob prescrição médica.</div>
+        </div>
+      `,
+    };
+
+    function displayConversation(avatar) {
+      chatArea.innerHTML = conversations[avatar] || '';
+    }
+
+    avatarFilterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        avatarFilterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const avatar = btn.getAttribute('data-avatar');
+        displayConversation(avatar);
+      });
+    });
+
+    // Display the initial conversation (Marhia.IA)
+    displayConversation('marhia');
+
+  </script>
 </body>
 </html> 
